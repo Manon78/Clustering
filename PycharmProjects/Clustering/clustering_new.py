@@ -38,7 +38,7 @@ def tokenize(text):
 
 # Create a lexicon of tokens present in emails
 # Lexicon will be used to evaluate at a glance what french/english/errors distribution is found in my emails
-# Lower-case all emails (for greater coherence & similarity among texts), then tokenize and extend words to a list.
+# Lower-case all text, then tokenize and extend words to a list.
 def make_lexicon(list_of_texts):
     lexicon = []
     for text in list_of_texts:
@@ -47,20 +47,7 @@ def make_lexicon(list_of_texts):
     lexicon.extend(current_words)
     return lexicon
 
-
-# Use sklearn to create a tf-idf matrix for our emails.
-#
-#       Settings:
-#   max_df is max document frequency above which the term is not considered relevant to clustering. Here, 80%.
-#   min_df is min percentage of documents in which the term must appear. Helps prevent a bias for sparse data.
-#   Here, min_df is 0.06x50, or 3 documents.
-#   N-gram range: we are using unigrams, bigrams & trigrams.
-
-
-#from sklearn.feature_extraction.text import TfidfVectorizer
-
-#Vectorize the terms into tf-idf vectors, using science kit learn.
-#store the vectorizer and settings in a variable
+#Use sklearn module TfidfVectorizer to obtain document similarity matrix
 vect = TfidfVectorizer(
                                  max_df=0.8, max_features=200000,
                                  min_df=0.06, stop_words=None,
@@ -72,9 +59,8 @@ print("\nMatrix to array: [list of [documents, which are a list of word tf-idf v
 print(matrix.toarray())
 print("\nMatrix shape: (number of documents, number of features) ")
 print(matrix.shape)
-#This allows the matrix to be visually represented
 
-#TODO: Am I interested in the similarity or difference, for hierarchical agglomerative clustering?
+#TODO: Work out whether I'm interested in cosine similarity or cos distance for hierarchical agglomerative clustering
 similarity = cosine_similarity(matrix)
 print("\nSimilarity: ")
 print(similarity)
@@ -90,19 +76,3 @@ print(dist)
 #    smalls.extend(min(line))
 #print(min(smalls))
 
-
-
-
-#This is the inbuild sklearn agglomerative clustering.
-# When I finish working out how it works, I can use it for comparison purposes.
-"""
-# sklearn agglomerative clustering
-from sklearn.cluster import AgglomerativeClustering
-clus = AgglomerativeClustering(
-                              n_clusters=2, affinity='cosine',
-                              connectivity=None,
-                              n_components=None, compute_full_tree='auto',
-                              linkage='complete')
-#fit_predict performs clustering on X and returns cluster labels. fit_predict(X, y=optional)
-print(clus.fit(matrix.toarray()))
-"""
