@@ -281,3 +281,30 @@ for iteration in range(0, s):
             print("\ndone")
             end = True
 
+
+############################## PART V: Use scipy hierarchical agglo clustering for comparison #########################
+
+# Use scipy to cluster and matlab to graph the hierarchical agglomerative clustering. This can be used for comparison.
+# Note: Not working at the moment. TODO: return similarity matrix from within nested loop, for distance matrix below.
+'''
+distance = 1 - similarity_matrix
+linkage_matrix = ward(distance) #define the linkage_matrix using average clustering pre-computed distances
+# Note: ward is Inner squared distance (minimum variance algorithm)
+
+fig, ax = plt.subplots(figsize=(15, 20)) # set size
+ax = dendrogram(linkage_matrix, orientation="right")
+
+plt.tick_params(\
+    axis= 'x',          # changes apply to the x-axis
+    which='both',      # both major and minor ticks are affected
+    bottom='off',      # ticks along the bottom edge are off
+    top='off',         # ticks along the top edge are off
+    labelbottom='off')
+
+plt.tight_layout() #show plot with tight layout
+
+#uncomment below to save figure
+plt.savefig('clusters.png', dpi=200) #save figure as clusters
+
+'''
+
