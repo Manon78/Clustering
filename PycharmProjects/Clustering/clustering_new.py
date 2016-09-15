@@ -1,3 +1,7 @@
+
+
+# NOTE: THIS IS NO LONGER THE WORKING VERSION> please refer to cluster.py in the main repository folder.
+
 import numpy
 #import pandas
 import nltk
@@ -76,3 +80,4 @@ print(dist)
 #    smalls.extend(min(line))
 #print(min(smalls))
 
+# END HERE 5th September.
